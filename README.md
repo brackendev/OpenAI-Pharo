@@ -25,8 +25,6 @@ Metacello new
 ## Example Usage
 
 ```smalltalk
-| chat |
-
 "Programatically use an OpenAI chat session."
 
 chat := OpenAIChat startWithSDK: (OpenAISDK createWithAPIKey: 'API_KEY').
