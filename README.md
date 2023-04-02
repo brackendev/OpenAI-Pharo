@@ -3,10 +3,12 @@ OpenAI-Pharo
 
 **A powerful [OpenAI](https://platform.openai.com/) playground.**
 
+![](images/screenshot.png)
+
+## Requirements
+
 * [OpenAI API](https://platform.openai.com/)
 * [Pharo 10](https://www.pharo.org/)
-
-![](images/screenshot.png)
 
 ## Installation
 
