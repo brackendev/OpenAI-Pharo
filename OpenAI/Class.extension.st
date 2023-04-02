@@ -50,6 +50,6 @@ Class >> updateCommentWithOpenAICRCWithSDK: anOpenAISDK [
 	crc ifNotNil: [ 
 		self class comment: crc , String crlf , String crlf , String crlf
 			,
-			'[This comment was automatically created with https://github.com/brackendev/Pharo-OpenAI]'
+			'[This comment was automatically created with https://github.com/brackendev/OpenAI-Pharo]'
 		]
 ]

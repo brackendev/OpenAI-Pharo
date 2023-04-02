@@ -166,7 +166,7 @@ OpenAIChatGUI >> initializePresenters [
 OpenAIChatGUI >> initializeWindow: aWindowPresenter [
 
 	aWindowPresenter
-		aboutText: 'https://github.com/brackendev/Pharo-OpenAI';
+		aboutText: 'https://github.com/brackendev/OpenAI-Pharo';
 		initialExtent: 400 @ 400;
 		title: 'OpenAI Chat'
 ]
