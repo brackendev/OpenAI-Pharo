@@ -3,7 +3,8 @@ OpenAI-Pharo
 
 **A powerful [OpenAI](https://platform.openai.com/) playground.**
 
-* [Pharo 10](https://www.pharo.org/) reference platform.
+* [OpenAI API](https://platform.openai.com/)
+* [Pharo 10](https://www.pharo.org/)
 
 ![](images/screenshot.png)
 
