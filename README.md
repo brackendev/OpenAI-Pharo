@@ -7,13 +7,13 @@ OpenAI-Pharo
 
 ## Requirements
 
-* [OpenAI API](https://platform.openai.com/)
-* [Pharo 10](https://www.pharo.org/)
+* [OpenAI API](https://platform.openai.com/) key
+* [Pharo 10](https://www.pharo.org/) installation
 
 ## Installation
 
 1. Go to <https://platform.openai.com/account/api-keys> to set up an API key.
-2. In a Playground, _Do it_:
+2. In a Pharo 10 Playground, _Do it_:
 
 ```smalltalk
 Metacello new 
