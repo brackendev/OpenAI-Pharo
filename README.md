@@ -7,7 +7,7 @@ OpenAI-Pharo
 
 ## Requirements
 
-* [OpenAI API](https://platform.openai.com/) key
+* [OpenAI](https://platform.openai.com/) API key
 * [Pharo 10](https://www.pharo.org/) installation
 
 ## Installation
