@@ -74,17 +74,13 @@ OpenAIImageGUI openWithSDK: sdk.
 ```
 
 ```smalltalk
-"Update any class comment with the generated Class Responsibility Collaborator (based on the class definition and source code)."
+"Update any class comment with the generated Class Responsibility Collaborator (based on class definitions and source code)."
 
 sdk := (OpenAISDK createWithAPIKey: 'API_KEY').
 AnyClassYouWant updateCommentWithOpenAICRCWithSDK: sdk.
 ```
 
 ## Documentation
-
-### TODO
-
-* ...
 
 ### Extension Methods
 
@@ -93,6 +89,11 @@ AnyClassYouWant updateCommentWithOpenAICRCWithSDK: sdk.
 * [**Class** _updateCommentWithOpenAICRCWithSDK_](https://github.com/brackendev/OpenAI-Pharo/blob/f97f77903d201d018b14d8ab6e43c8980c866464/OpenAI/Class.extension.st#L46) - Update a class comment with a generated [Class Responsibility Collaborator](https://en.wikipedia.org/wiki/Class-responsibility-collaboration_card).
 * [**ImageMorph** _outputPNGFile_](https://github.com/brackendev/OpenAI-Pharo/blob/f97f77903d201d018b14d8ab6e43c8980c866464/OpenAI/ImageMorph.extension.st#L4) - Export an ImageMorph to a PNG file. [OpenAIImageGUI](https://github.com/brackendev/OpenAI-Pharo/blob/master/OpenAI/OpenAIImageGUI.class.st) uses this to export images.
 * [**String** _outputTextFile_](https://github.com/brackendev/OpenAI-Pharo/blob/f97f77903d201d018b14d8ab6e43c8980c866464/OpenAI/String.extension.st#L4) - Export a string to a text file. [OpenAIChatGUI](https://github.com/brackendev/OpenAI-Pharo/blob/master/OpenAI/OpenAIChatGUI.class.st) uses this to export chats.
+
+## TODO
+
+- [ ] Add more documentation for class and instance usages
+- [ ] Test on [Pharo](https://www.pharo.org/) development versions: 11, 12
 
 ## Acknowledgements
 
