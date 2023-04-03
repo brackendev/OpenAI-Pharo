@@ -84,6 +84,8 @@ An [examples package](https://github.com/brackendev/OpenAI-Pharo/tree/master/Ope
 
 ### TODO
 
+* ...
+
 ### Helpful Extension Methods
 
 * **Class** _classResponsibilityCollaboratorWithSDK_ - Retrieve the  [Class Responsibility Collaborator](https://en.wikipedia.org/wiki/Class-responsibility-collaboration_card)  for a class.
