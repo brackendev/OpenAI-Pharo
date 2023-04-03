@@ -5,7 +5,7 @@ OpenAI-Pharo
 
 * Interact with unlimited chatbots using different models, programatically and via GUIs. Export chats as JSON.
 * Generate images with different sizes, programatically and via GUIs. Export images as PNGs.
-* **_Bonus!_** Automatically update Pharo class comments with the [Class Responsibility Collaborator](https://en.wikipedia.org/wiki/Class-responsibility-collaboration_card) that OpenAI creates.
+* **_Bonus!_** Automatically update Pharo class comments with a generated [Class Responsibility Collaborator](https://en.wikipedia.org/wiki/Class-responsibility-collaboration_card).
 
 ![](images/screenshot.png)
 
@@ -88,11 +88,11 @@ An [examples package](https://github.com/brackendev/OpenAI-Pharo/tree/master/Ope
 
 ### Helpful Extension Methods
 
-* **Class** _classResponsibilityCollaboratorWithSDK_ - Retrieve the  [Class Responsibility Collaborator](https://en.wikipedia.org/wiki/Class-responsibility-collaboration_card)  for a class.
-* **Class** _definitionAndSourceCode_ - Retrieve the definition and source code for a class.
-* **Class** _updateCommentWithOpenAICRCWithSDK_ - Update a class comment with the  [Class Responsibility Collaborator](https://en.wikipedia.org/wiki/Class-responsibility-collaboration_card)  that is generated.
-* **ImageMorph** _outputPNGFile_ - Export an ImageMorph to a PNG file. This is what [OpenAIImageGUI](https://github.com/brackendev/OpenAI-Pharo/blob/master/OpenAI/OpenAIImageGUI.class.st) uses.
-* **String** _outputTextFile_ - Export a string to a text file. This is what [OpenAIChatGUI](https://github.com/brackendev/OpenAI-Pharo/blob/master/OpenAI/OpenAIChatGUI.class.st) uses.
+* [**Class** _classResponsibilityCollaboratorWithSDK_](https://github.com/brackendev/OpenAI-Pharo/blob/f97f77903d201d018b14d8ab6e43c8980c866464/OpenAI/Class.extension.st#L4) - Generate a [Class Responsibility Collaborator](https://en.wikipedia.org/wiki/Class-responsibility-collaboration_card) for a class.
+* [**Class** _definitionAndSourceCode_](https://github.com/brackendev/OpenAI-Pharo/blob/f97f77903d201d018b14d8ab6e43c8980c866464/OpenAI/Class.extension.st#L36) - Retrieve the definition and source code for a class.
+* [**Class** _updateCommentWithOpenAICRCWithSDK_](https://github.com/brackendev/OpenAI-Pharo/blob/f97f77903d201d018b14d8ab6e43c8980c866464/OpenAI/Class.extension.st#L46) - Update a class comment with a generated [Class Responsibility Collaborator](https://en.wikipedia.org/wiki/Class-responsibility-collaboration_card).
+* [**ImageMorph** _outputPNGFile_](https://github.com/brackendev/OpenAI-Pharo/blob/f97f77903d201d018b14d8ab6e43c8980c866464/OpenAI/ImageMorph.extension.st#L4) - Export an ImageMorph to a PNG file. This is what [OpenAIImageGUI](https://github.com/brackendev/OpenAI-Pharo/blob/master/OpenAI/OpenAIImageGUI.class.st) uses to export images.
+* [**String** _outputTextFile_](https://github.com/brackendev/OpenAI-Pharo/blob/f97f77903d201d018b14d8ab6e43c8980c866464/OpenAI/String.extension.st#L4) - Export a string to a text file. This is what [OpenAIChatGUI](https://github.com/brackendev/OpenAI-Pharo/blob/master/OpenAI/OpenAIChatGUI.class.st) uses to export chats.
 
 ## Author
 
