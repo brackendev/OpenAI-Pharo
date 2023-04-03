@@ -25,9 +25,16 @@ Metacello new
 ## Example Usage
 
 ```smalltalk
+"Lists the currently available models."
+
+(OpenAISDK createWithAPIKey: 'API_KEY') listModels.
+```
+
+```smalltalk
 "Programatically use an OpenAI chat session."
 
-chat := OpenAIChat startWithSDK: (OpenAISDK createWithAPIKey: 'API_KEY').
+sdk := (OpenAISDK createWithAPIKey: 'API_KEY').
+chat := OpenAIChat startWithSDK: sdk.
 chat submitSystemPrompt: 'You are a chatbot named OMM 0000.'.
 chat submitUserPrompt: 'Who are you?'.
 chat lastChat. "I am OMM 0000, a language model AI chatbot..."
@@ -40,7 +47,9 @@ chat lastChat. "I was created by OpenAI..."
 "/export - Export the chat to a JSON file"
 "/system A new system prompt"
 
-OpenAIChatGUI openWithSDK: (OpenAISDK createWithAPIKey: 'API_KEY').
+sdk := (OpenAISDK createWithAPIKey: 'API_KEY').
+sdk model: 'gpt-4'. "Optional. Default is gpt-3.5-turbo"
+OpenAIChatGUI openWithSDK: sdk.
 ```
 
 ```smalltalk
@@ -48,13 +57,15 @@ OpenAIChatGUI openWithSDK: (OpenAISDK createWithAPIKey: 'API_KEY').
 "/export - Export the image to a PNG file"
 "/imagesize '256x256' or '512x512' or '1024x1024'"
 
-OpenAIImageGUI openWithSDK: (OpenAISDK createWithAPIKey: 'API_KEY').
+sdk := (OpenAISDK createWithAPIKey: 'API_KEY').
+OpenAIImageGUI openWithSDK: sdk.
 ```
 
 ```smalltalk
 "Update any class comment with the Class Responsibility Collaborator that OpenAI creates (based on the class definition and source code)."
 
-AnyClassYouWant updateCommentWithOpenAICRCWithSDK: (OpenAISDK createWithAPIKey: 'API_KEY').
+sdk := (OpenAISDK createWithAPIKey: 'API_KEY').
+AnyClassYouWant updateCommentWithOpenAICRCWithSDK: sdk.
 ```
 
 ## Author
