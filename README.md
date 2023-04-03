@@ -1,7 +1,7 @@
 OpenAI-Pharo
 ============
 
-**A powerful [OpenAI](https://platform.openai.com/) playground.**
+**A powerful [OpenAI](https://platform.openai.com/) playground for pro-users and developers.**
 
 * Interact with unlimited chatbots using different models, programatically and via GUIs. Export chats as JSON.
 * Generate images with different sizes, programatically and via GUIs. Export images as PNGs.
