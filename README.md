@@ -92,7 +92,7 @@ AnyClassYouWant updateCommentWithOpenAICRCWithSDK: sdk.
 
 ## TODO
 
-- [ ] Add more documentation for core, GUI, and model classes
+- [ ] Add documentation for core, GUI, and model classes
 - [ ] Test on [Pharo](https://www.pharo.org/) development versions: 11, 12
 
 ## Acknowledgements
