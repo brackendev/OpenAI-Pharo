@@ -78,7 +78,7 @@ sdk := (OpenAISDK createWithAPIKey: 'API_KEY').
 AnyClassYouWant updateCommentWithOpenAICRCWithSDK: sdk.
 ```
 
-An [examples package](https://github.com/brackendev/OpenAI-Pharo/tree/master/OpenAI-Examples) is also included.
+An [examples package](https://github.com/brackendev/OpenAI-Pharo/tree/master/OpenAI-Examples) is included.
 
 ## Documentation
 
