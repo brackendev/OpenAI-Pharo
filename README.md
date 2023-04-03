@@ -28,6 +28,8 @@ Metacello new
 
 ## Example Usage
 
+(An [examples package](https://github.com/brackendev/OpenAI-Pharo/tree/master/OpenAI-Examples) is also included.)
+
 ```smalltalk
 "Lists the currently available models."
 
@@ -77,8 +79,6 @@ OpenAIImageGUI openWithSDK: sdk.
 sdk := (OpenAISDK createWithAPIKey: 'API_KEY').
 AnyClassYouWant updateCommentWithOpenAICRCWithSDK: sdk.
 ```
-
-An [examples package](https://github.com/brackendev/OpenAI-Pharo/tree/master/OpenAI-Examples) is included.
 
 ## Documentation
 
