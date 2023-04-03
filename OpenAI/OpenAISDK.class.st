@@ -22,7 +22,8 @@ Class {
 	#name : #OpenAISDK,
 	#superclass : #Object,
 	#instVars : [
-		'client'
+		'client',
+		'model'
 	],
 	#category : #'OpenAI-Core'
 }
@@ -70,7 +71,7 @@ OpenAISDK >> createChatCompletionWithMessages: aChatObjectArray [
 
 	^ self
 		  createChatCompletionWithMessages: aChatObjectArray
-		  model: 'gpt-3.5-turbo'
+		  model: self model
 ]
 
 { #category : #public }
@@ -138,6 +139,18 @@ OpenAISDK >> listModels [
 		ifTrue: [ ^ OpenAISDKError createWithAPIResponse: decoded ]
 		ifFalse: [ 
 		^ OpenAISDKModels createWithAPIResponse: decoded ]
+]
+
+{ #category : #accessing }
+OpenAISDK >> model [
+
+	model ifNil: [ ^ 'gpt-3.5-turbo' ] ifNotNil: [ ^ model ]
+]
+
+{ #category : #accessing }
+OpenAISDK >> model: anObject [
+
+	model := anObject
 ]
 
 { #category : #public }
