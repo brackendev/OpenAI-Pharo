@@ -5,7 +5,7 @@ OpenAI-Pharo
 
 * Interact with unlimited chatbots using different models, programatically and via GUIs. Export chats as JSON.
 * Generate images with different sizes, programatically and via GUIs. Export images as PNGs.
-* **_Bonus!_** Automatically update Pharo class comments with a generated [Class Responsibility Collaborator](https://en.wikipedia.org/wiki/Class-responsibility-collaboration_card).
+* **_Bonus!_** Automatically update Pharo class comments with a generated [Class Responsibility Collaborator](https://en.wikipedia.org/wiki/Class-responsibility-collaboration_card) (based on the class definition and source code).
 
 ![](images/screenshot.png)
 
@@ -72,7 +72,7 @@ OpenAIImageGUI openWithSDK: sdk.
 ```
 
 ```smalltalk
-"Update any class comment with the [Class Responsibility Collaborator](https://en.wikipedia.org/wiki/Class-responsibility-collaboration_card) that OpenAI creates (based on the class definition and source code)."
+"Update any class comment with the generated Class Responsibility Collaborator (based on the class definition and source code)."
 
 sdk := (OpenAISDK createWithAPIKey: 'API_KEY').
 AnyClassYouWant updateCommentWithOpenAICRCWithSDK: sdk.
