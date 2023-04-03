@@ -3,6 +3,10 @@ OpenAI-Pharo
 
 **A powerful [OpenAI](https://platform.openai.com/) playground.**
 
+* Interact with multiple chatbots using different models, programatically and via GUIs. Export chats as JSON.
+* Generate images with different sizes, create Pharo class comments automatically, programatically and via GUIs. Export images as PNGs.
+* Automatically update @Pharo class comments with the [Class Responsibility Collaborator](https://en.wikipedia.org/wiki/Class-responsibility-collaboration_card) that OpenAI creates.
+
 ![](images/screenshot.png)
 
 ## Requirements
@@ -31,7 +35,7 @@ Metacello new
 ```
 
 ```smalltalk
-"Programatically use an OpenAI chat session."
+"Programatically use a chat session."
 
 sdk := (OpenAISDK createWithAPIKey: 'API_KEY').
 chat := OpenAIChat startWithSDK: sdk.
@@ -43,7 +47,13 @@ chat lastChat. "I was created by OpenAI..."
 ```
 
 ```smalltalk
-"A GUI for an OpenAI chat session."
+"Programtically generate images"
+
+sdk := (OpenAISDK createWithAPIKey: 'API_KEY').sdk createImageWithPrompt: 'An elephant drinking water on the moon' number: 2 size: '1024x1024'.
+```
+
+```smalltalk
+"Open a chat session GUI."
 "/export - Export the chat to a JSON file"
 "/system A new system prompt"
 
@@ -53,7 +63,7 @@ OpenAIChatGUI openWithSDK: sdk.
 ```
 
 ```smalltalk
-"A GUI for a generating images with OpenAI."
+"Open an image generation GUI."
 "/export - Export the image to a PNG file"
 "/imagesize '256x256' or '512x512' or '1024x1024'"
 
@@ -74,6 +84,7 @@ Bracken Spencer
 
 * [GitHub](https://www.github.com/brackendev)
 * [LinkedIn](https://www.linkedin.com/in/brackenspencer/)
+* [Mastodon](https://mastodon.cloud/@brackendev)
 * [Twitter](https://twitter.com/brackendev)
 
 ## License
