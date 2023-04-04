@@ -40,6 +40,7 @@ Metacello new
 "Programatically use a chat session."
 
 sdk := (OpenAISDK createWithAPIKey: 'API_KEY').
+sdk model: 'gpt-4'. "Optional. Default is gpt-3.5-turbo"
 chat := OpenAIChat startWithSDK: sdk.
 chat submitSystemPrompt: 'You are a chatbot named OMM 0000.'.
 chat submitUserPrompt: 'Who are you?'.
@@ -51,7 +52,8 @@ chat lastChat. "I was created by OpenAI..."
 ```smalltalk
 "Programtically generate images"
 
-sdk := (OpenAISDK createWithAPIKey: 'API_KEY').sdk createImageWithPrompt: 'An elephant drinking water on the moon' number: 2 size: '1024x1024'.
+sdk := (OpenAISDK createWithAPIKey: 'API_KEY').
+sdk createImageWithPrompt: 'An elephant drinking water on the moon' number: 2 size: '1024x1024'.
 ```
 
 ```smalltalk
@@ -77,6 +79,7 @@ OpenAIImageGUI openWithSDK: sdk.
 "Update any class comment with the generated Class Responsibility Collaborator (based on class definitions and source code)."
 
 sdk := (OpenAISDK createWithAPIKey: 'API_KEY').
+sdk model: 'gpt-4'. "Optional. Default is gpt-3.5-turbo"
 AnyClassYouWant updateCommentWithOpenAICRCWithSDK: sdk.
 ```
 
