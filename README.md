@@ -95,6 +95,7 @@ AnyClassYouWant updateCommentWithOpenAICRCWithSDK: sdk.
 
 ## TODO
 
+- [ ] More testing for errors, token limits, etc.
 - [ ] Add documentation for core, GUI, and model classes
 - [ ] Test on [Pharo](https://www.pharo.org/) development versions: 11, 12
 
