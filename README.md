@@ -3,8 +3,8 @@ OpenAI-Pharo
 
 **A powerful [OpenAI](https://platform.openai.com/) playground for pro-users and developers.**
 
-* Interact with unlimited chatbots using different models, programatically and via GUIs. Export chats as JSON.
-* Generate images with different sizes, programatically and via GUIs. Export images as PNGs.
+* Interact with unlimited chatbots using different models, programatically and via GUIs. Evaluate responses to Pharo objects. Export chats as JSON.
+* Generate images with different sizes, programatically and via GUIs. Use images as Pharo objects. Export images as PNGs.
 * **_Bonus!_** Automatically update Pharo class comments with a generated [Class Responsibility Collaborator](https://en.wikipedia.org/wiki/Class-responsibility-collaboration_card) (based on class definitions and source code).
 
 ![](images/screenshot.png)
@@ -81,6 +81,18 @@ OpenAIImageGUI openWithSDK: sdk.
 sdk := (OpenAISDK createWithAPIKey: 'API_KEY').
 sdk model: 'gpt-4'. "Optional. Default is gpt-3.5-turbo"
 AnyClassYouWant updateCommentWithOpenAICRCWithSDK: sdk.
+```
+
+```smalltalk
+"Evaluate chat responses to Pharo objects."
+
+sdk := (OpenAISDK createWithAPIKey: 'API_KEY').
+chat := OpenAIChat startWithSDK: sdk.
+chat submitUserPrompt: 'Return me a list of the US states as a Smalltalk array'.
+content := chat lastChat content. "#('Alabama' 'Alaska' 'Arizona' 'Arkansas' ..."
+array := Smalltalk compiler evaluate: content.
+array size. "50"
+array first. "Alabama"
 ```
 
 ## Documentation
