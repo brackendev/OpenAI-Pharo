@@ -96,7 +96,7 @@ AnyClassYouWant updateCommentWithOpenAICRCWithSDK: sdk.
 ```
 
 ```smalltalk
-"Evaluate chat responses to Pharo objects."
+"Evaluate chat responses to objects."
 
 sdk := (OpenAISDK createWithAPIKey: 'API_KEY').
 chat := OpenAIChat startWithSDK: sdk.
