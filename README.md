@@ -100,7 +100,7 @@ AnyClassYouWant updateCommentWithOpenAICRCWithSDK: sdk.
 
 sdk := (OpenAISDK createWithAPIKey: 'API_KEY').
 chat := OpenAIChat startWithSDK: sdk.
-chat submitUserPrompt: 'Return me a list of the US states as a Smalltalk array'.
+chat submitUserPrompt: 'Return a list of the US states as a Pharo array'.
 content := chat lastChat content. "#('Alabama' 'Alaska' 'Arizona' 'Arkansas' ..."
 array := Smalltalk compiler evaluate: content.
 array size. "50"
