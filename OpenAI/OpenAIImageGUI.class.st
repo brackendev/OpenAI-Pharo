@@ -81,6 +81,7 @@ OpenAIImageGUI >> handleInput: aString [
 			].
 		(text beginsWith: '/inspect') ifTrue: [ 
 			imageContainer image inspect.
+			textField text: ''.
 			^ nil
 			].
 
