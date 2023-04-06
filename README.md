@@ -3,9 +3,18 @@ OpenAI-Pharo
 
 **A powerful [OpenAI](https://platform.openai.com/) playground for pro-users and developers.**
 
-* Interact with unlimited chatbots using different models, programatically and via GUIs. Evaluate responses to Pharo objects. Export chats as JSON.
-* Generate images with different sizes, programatically and via GUIs. Use images as Pharo objects. Export images as PNGs.
-* **_Bonus!_** Automatically update Pharo class comments with a generated [Class Responsibility Collaborator](https://en.wikipedia.org/wiki/Class-responsibility-collaboration_card) (based on class definitions and source code).
+* Chat
+  * Interact with unlimited chatbots using different models
+  * Programatically and GUI
+  * Evaluate responses to Pharo objects
+  * Export chats as JSON
+* Image Generation
+  * Generate images with different sizes
+  * Programatically and GUI
+  * Use images as Pharo objects
+  * Export images as PNGs
+* **_Bonus!_** 
+  * Automatically update Pharo class comments with a generated [Class Responsibility Collaborator](https://en.wikipedia.org/wiki/Class-responsibility-collaboration_card) (based on class definitions and source code)
 
 ![](images/screenshot.png)
 
