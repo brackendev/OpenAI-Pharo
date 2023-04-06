@@ -59,6 +59,8 @@ sdk createImageWithPrompt: 'An elephant drinking water on the moon' number: 2 si
 ```smalltalk
 "Open a chat session GUI."
 "/export - Export the chat to a JSON file"
+"/evaluate - Evaluate the last response as an object"
+"/inspect - Inspect the last response"
 "/system A new system prompt"
 
 sdk := (OpenAISDK createWithAPIKey: 'API_KEY').
@@ -70,6 +72,7 @@ OpenAIChatGUI openWithSDK: sdk.
 "Open an image generation GUI."
 "/export - Export the image to a PNG file"
 "/imagesize '256x256' or '512x512' or '1024x1024'"
+"/inspect - Inspect the image"
 
 sdk := (OpenAISDK createWithAPIKey: 'API_KEY').
 OpenAIImageGUI openWithSDK: sdk.
