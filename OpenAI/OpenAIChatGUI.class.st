@@ -138,6 +138,14 @@ OpenAIChatGUI >> handleInput: aString [
 			fieldInput text: ''.
 			^ nil
 			].
+		(text beginsWith: '/inspect') ifTrue: [ 
+			self chat lastChat content inspect.
+			^ nil
+			].
+		(text beginsWith: '/evaluate') ifTrue: [ 
+			(Smalltalk compiler evaluate: self chat lastChat content) inspect.
+			^ nil
+			].
 
 		self chat submitUserPrompt: text.
 		self displayUserResponse: text.

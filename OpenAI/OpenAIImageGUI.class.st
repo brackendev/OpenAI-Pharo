@@ -79,6 +79,10 @@ OpenAIImageGUI >> handleInput: aString [
 			textField text: ''.
 			^ nil
 			].
+		(text beginsWith: '/inspect') ifTrue: [ 
+			imageContainer image inspect.
+			^ nil
+			].
 
 
 		response := sdk
