@@ -1,26 +1,22 @@
 "
 Class: OpenAIImageGUIExample
 
-I represent a class that provides examples of how to use the OpenAIImageGUI class.
+I represent a class that demonstrates how to use the OpenAI Image GUI with an API key.
 
 Responsibilities:
-- Provide an example of how to open the OpenAIImageGUI with an SDK.
-- Provide an example of how to open the OpenAIImageGUI with an SDK and a specific image size.
-- Use the OpenAIChatGUI and OpenAISDK classes to interact with the OpenAIImageGUI.
+- I demonstrate how to create an instance of the OpenAIChatGUI with an API key.
+- I provide an example of using the OpenAI Image GUI with the OpenAISDK.
+- I serve as a reference for developers to understand how to use the OpenAI Image GUI in their projects.
 
 Collaborators:
-- OpenAIChatGUI
-- OpenAISDK
-- OpenAIImageGUI
+- OpenAIChatGUI: I create an instance of this class with the provided API key.
+- OpenAISDK: I use this class to create an instance with the given API key.
 
 Example:
-""Example of opening the OpenAIImageGUI with an SDK""
-OpenAIImageGUIExample exampleOpenWithSDK.
-""Example of opening the OpenAIImageGUI with an SDK and specific image size""
-OpenAIImageGUIExample exampleOpenWithSDK_imageSize.
+- ""exampleOpenWithSDK"": This method demonstrates how to create an instance of the OpenAIChatGUI with an API key.
 
 
-[This comment was created with https://github.com/brackendev/Pharo-OpenAI]
+[This comment was automatically created with https://github.com/brackendev/OpenAI-Pharo]
 "
 Class {
 	#name : #OpenAIImageGUIExample,
@@ -33,13 +29,4 @@ OpenAIImageGUIExample class >> exampleOpenWithSDK [
 
 	<sampleInstance>
 	^ OpenAIChatGUI openWithSDK: (OpenAISDK createWithAPIKey: 'API_KEY')
-]
-
-{ #category : #examples }
-OpenAIImageGUIExample class >> exampleOpenWithSDK_imageSize [
-
-	<sampleInstance>
-	^ OpenAIImageGUI
-		openWithSDK: (OpenAISDK createWithAPIKey: 'API_KEY')
-		imageSize: '1024x1024'
 ]

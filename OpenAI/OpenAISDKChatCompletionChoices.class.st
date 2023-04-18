@@ -1,23 +1,21 @@
 "
-1. Class: OpenAISDKChatCompletionChoices
+Class: OpenAISDKChatCompletionChoices
 
-I represent a class that creates a new chat completion choice with an API response.
+I represent a class that manages chat completion choices from OpenAI API responses.
 
-2. Responsibilities:
-- Create a new chat completion choice with an API response.
-- Extract useful information from the API response such as the message, index, role, and content.
-- Instantiate a new OpenAISDKChat based on the extracted information.
+Responsibilities:
+- I create instances of myself using API responses.
+- I store the index, message, and finish reason of a chat completion choice.
+- I provide access to the chat completion choice information.
 
-3. Collaborators:
-- OpenAISDKChat: Collaborates to create a new chat with the extracted message and content.
+Collaborators:
+- OpenAISDKChat: I create instances of OpenAISDKChat using the role and content from the API response.
 
-4. Example:
-""Create a new chat completion choice with an API response""
-aResponse := {'message' -> {'role' -> 'bot', 'content' -> 'Hello, how can I help you?'}, 'index' -> 0, 'finish_reason' -> 'completed'}.
-completionChoice := OpenAISDKChatCompletionChoices createWithAPIResponse: aResponse.  ""Creates a new chat completion choice based on the API response""
+Example:
+- ""Create an OpenAISDKChatCompletionChoices instance from an API response: `OpenAISDKChatCompletionChoices createWithAPIResponse: aResponse`""
 
 
-[This comment was created with https://github.com/brackendev/Pharo-OpenAI]
+[This comment was automatically created with https://github.com/brackendev/OpenAI-Pharo]
 "
 Class {
 	#name : #OpenAISDKChatCompletionChoices,

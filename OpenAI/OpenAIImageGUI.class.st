@@ -1,23 +1,22 @@
 "
 Class: OpenAIImageGUI
 
-I represent a class that creates a GUI interface for an OpenAI image.
+I represent a graphical user interface for interacting with OpenAI image generation.
 
 Responsibilities:
-- Create a new GUI interface with the provided OpenAISDK and image size properties.
-- Display the GUI interface.
-- Take keyboard focus for the text field within the GUI.
+- I create and manage a user interface for OpenAI image generation.
+- I handle user input and communicate with the OpenAI SDK.
+- I display generated images based on user input and SDK responses.
 
 Collaborators:
-- OpenAISDK: Provides the necessary image content for the GUI.
-- textField: The text field within the GUI that takes keyboard focus.
+- OpenAISDK: I interact with the OpenAI SDK to generate images based on user input.
+- TextField: I use a text field to capture user input for image generation.
 
 Example:
-OpenAIImageGUI openWithSDK: myOpenAISDK imageSize: '512x512'.
-""Creates a GUI with image content provided by myOpenAISDK and an image size of 512x512.""
+- ""Open an OpenAIImageGUI with a given OpenAISDK instance: `OpenAIImageGUI openWithSDK: anOpenAISDK`""
 
 
-[This comment was created with https://github.com/brackendev/Pharo-OpenAI]
+[This comment was automatically created with https://github.com/brackendev/OpenAI-Pharo]
 "
 Class {
 	#name : #OpenAIImageGUI,
@@ -36,27 +35,101 @@ Class {
 OpenAIImageGUI class >> openWithSDK: anOpenAISDK [
 
 	| gui |
-	gui := self new sdk: anOpenAISDK; imageSize: '256x256'.
+	gui := self new
+		       sdk: anOpenAISDK;
+		       imageSize: '256x256'.
 	gui open.
 	gui textField takeKeyboardFocus
 ]
 
-{ #category : #specs }
-OpenAIImageGUI class >> openWithSDK: anOpenAISDK imageSize: aSizeString [
+{ #category : #'action handling' }
+OpenAIImageGUI >> actionExport [
 
-	| gui |
-	gui := self new sdk: anOpenAISDK; imageSize: aSizeString.
-	gui open.
-	gui textField takeKeyboardFocus
+	imageContainer image
+		ifNil: [ self inform: 'Submit a prompt first' ]
+		ifNotNil: [ 
+			| f |
+			f := UUID new asString.
+
+			imageContainer image asMorph outputPNGFile: f.
+
+			textLabel label ifNotEmpty: [ 
+				textLabel label outputTextFile: f , '.txt' ].
+
+			self inform: 'Image exported to filesystem'
+			]
 ]
 
-{ #category : #loading }
+{ #category : #'action handling' }
+OpenAIImageGUI >> actionInspect [
+
+	imageContainer image
+		ifNil: [ self inform: 'Submit a prompt first' ]
+		ifNotNil: [ imageContainer image inspect ]
+]
+
+{ #category : #'action handling' }
+OpenAIImageGUI >> actionSubmit [
+
+	textField text
+		ifEmpty: [ self inform: 'Input a prompt first' ]
+		ifNotEmpty: [ self handleInput: textField text ]
+]
+
+{ #category : #layout }
 OpenAIImageGUI >> defaultLayout [
 
+	<spec: #default>
+	| barResponse barSubmit |
+	barResponse := self newActionBar
+		               add: (self newButton
+				                label: 'Export';
+				                icon: (self iconNamed: #glamorousSaveToUrl);
+				                help: 'Export to filesystem';
+				                action: [ self actionExport ];
+				                yourself);
+		               add: (self newButton
+				                label: 'Inspect';
+				                icon: (self iconNamed: #glamorousInspect);
+				                help: 'Inspect image';
+				                action: [ self actionInspect ];
+				                yourself);
+		               add: (self newButton
+				                label: 'Inspect';
+				                label: 'Clear';
+				                icon: (self iconNamed: #glamorousCancel);
+				                help: 'Clear the image';
+				                action: [ 
+					                imageContainer image: (Form extent: 0 @ 0).
+					                textField text: ''.
+					                textLabel label: ''
+					                ];
+				                yourself);
+		               yourself.
+
+	barSubmit := self newActionBar
+		             addLast: (self newButton
+				              label: 'Size';
+				              icon: (self iconNamed: #smallConfiguration);
+				              help: 'Image size';
+				              contextMenu: self menuImageSize;
+				              yourself);
+		             addLast: (self newButton
+				              label: 'Submit';
+				              icon: (self iconNamed: #glamorousGo);
+				              help: 'Submit prompt to OpenAI';
+				              action: [ self actionSubmit ];
+				              yourself).
+
 	^ SpBoxLayout newTopToBottom
-			  add: textLabel expand: false;
 		  add: imageContainer expand: true;
-		  add: textField expand: false;
+		  add: textLabel expand: false;
+		  add: barResponse expand: false;
+		  add: textField withConstraints: [ :constraints | 
+			  constraints height: 80.
+			  constraints padding: 5
+			  ];
+		  addLast: barSubmit expand: false;
 		  yourself
 ]
 
@@ -64,38 +137,22 @@ OpenAIImageGUI >> defaultLayout [
 OpenAIImageGUI >> handleInput: aString [
 
 	UIManager default showWaitCursorWhile: [ 
-		| text response url image |
+		| text response url |
 		text := aString trimBoth.
 		text ifEmpty: [ ^ nil ].
-		text = '/export' ifTrue: [ 
-			imageContainer image asMorph outputPNGFile: UUID new asString.
-			textField text: ''.
-			^ nil
-			].
-		(text beginsWith: '/imagesize ') ifTrue: [ 
-			| t |
-			t := text copyReplaceAll: '/imagesize ' with: ''.
-			self imageSize: t.
-			textField text: ''.
-			^ nil
-			].
-		(text beginsWith: '/inspect') ifTrue: [ 
-			imageContainer image inspect.
-			textField text: ''.
-			^ nil
-			].
 
 
 		response := sdk
 			            createImageWithPrompt: text
 			            number: 1
 			            size: imageSize.
+
 		url := response urls first.
-		image := ImageReadWriter formFromStream:
-			         (ZnEasy get: url) contents readStream.
-		imageContainer image: image.
+
+		imageContainer image: url imageFromURL.
 
 		textLabel label: text.
+
 		textField text: ''
 		]
 ]
@@ -135,10 +192,17 @@ OpenAIImageGUI >> initialize [
 OpenAIImageGUI >> initializePresenters [
 
 	textLabel := self newTextLabel.
+
 	imageContainer := self newImageContainer.
-	textField := self newTextInput
-		             whenSubmitDo: [ :text | self handleInput: text ];
-		             placeholder: 'Describe an image'
+	imageContainer image: (Form extent: 0 @ 0).
+
+	textField := self newText.
+	textField
+		beWrapWord;
+		editable: true;
+		placeholder: 'Your prompt'.
+
+	self focusOrder add: textField
 ]
 
 { #category : #loading }
@@ -152,11 +216,11 @@ OpenAIImageGUI >> initializeWindow: aWindowPresenter [
 
 	aWindowPresenter
 		aboutText: 'https://github.com/brackendev/OpenAI-Pharo';
-		initialExtent: 400 @ 400;
-		title: 'OpenAI Image Generator'
+		initialExtent: 400 @ 500;
+		title: 'OpenAI Image Creator'
 ]
 
-{ #category : #loading }
+{ #category : #accessing }
 OpenAIImageGUI >> layout [
 
 	^ self defaultLayout
@@ -181,6 +245,28 @@ response := ZnClient new
 					self inform:
 						'Failed to load image. Please check the URL and try again.'
 					]
+]
+
+{ #category : #gui }
+OpenAIImageGUI >> menuImageSize [
+
+	^ self newMenu
+		  addItem: [ :item | 
+			  item
+				  name: '256x256';
+				  action: [ self imageSize: '256x256' ]
+			  ];
+		  addItem: [ :item | 
+			  item
+				  name: '512x512';
+				  action: [ self imageSize: '512x512' ]
+			  ];
+		  addItem: [ :item | 
+			  item
+				  name: '1024x1024';
+				  action: [ self imageSize: '1024x1024' ]
+			  ];
+		  yourself
 ]
 
 { #category : #initialization }

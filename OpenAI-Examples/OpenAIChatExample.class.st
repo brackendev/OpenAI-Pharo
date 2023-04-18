@@ -1,23 +1,22 @@
 "
 Class: OpenAIChatExample
 
-I represent a class that provides an example of how to start using OpenAIChat. I use the OpenAISDK to create an instance of OpenAIChat and start a chat session.
+I represent a class that demonstrates how to start an OpenAI chat session using an API key.
 
 Responsibilities:
-- Create an instance of OpenAIChat using OpenAISDK.
-- Start a chat session with the created instance of OpenAIChat.
-- Provide an example of how to start using OpenAIChat.
+- I demonstrate how to create an OpenAI chat session.
+- I show how to use an API key to authenticate with the OpenAI SDK.
+- I provide an example method for starting a chat session using the SDK.
 
 Collaborators:
-- OpenAIChat: I use this class to create and start a chat session with.
-- OpenAISDK: I use this class to create an instance of OpenAIChat.
+- OpenAIChatSession: I start a chat session using this class.
+- OpenAISDK: I interact with this class to create an SDK instance with the provided API key.
 
 Example:
-OpenAIChatExample exampleStartWithSDK.
-""Creates an instance of OpenAIChat using OpenAISDK and starts a chat session.""
+- ""Start a chat session using the OpenAI SDK and API key"": OpenAIChatExample exampleStartWithSDK.
 
 
-[This comment was created with https://github.com/brackendev/Pharo-OpenAI]
+[This comment was automatically created with https://github.com/brackendev/OpenAI-Pharo]
 "
 Class {
 	#name : #OpenAIChatExample,
@@ -29,5 +28,5 @@ Class {
 OpenAIChatExample class >> exampleStartWithSDK [
 
 	<sampleInstance>
-	^ OpenAIChat startWithSDK: (OpenAISDK createWithAPIKey: 'API_KEY')
+	^ OpenAIChatSession startWithSDK: (OpenAISDK createWithAPIKey: 'API_KEY')
 ]

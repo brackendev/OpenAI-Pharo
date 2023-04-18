@@ -1,21 +1,21 @@
 "
 Class: OpenAISDKModels
 
-I represent a class responsible for creating OpenAI SDK models, parsing their APIs and handling their data.
+I represent a collection of OpenAI SDK models.
 
 Responsibilities:
-- Create new OpenAI SDK models.
-- Parse APIs for OpenAI SDK models.
-- Handle the data for OpenAI SDK models.
+- I create instances of myself using API responses.
+- I store the object and data from the API response.
+- I convert the data into a collection of OpenAISDKModel instances.
 
 Collaborators:
-- OpenAISDKModel class: Used to create OpenAI SDK models with API responses.
+- OpenAISDKModel: I create instances of OpenAISDKModel using the data from the API response.
 
 Example:
-OpenAISDKModels createWithAPIResponse: apiResponse. ""Returns a new OpenAI SDK model with data from the API response.""
+- ""Create an OpenAISDKModels instance from an API response: `models := OpenAISDKModels createWithAPIResponse: apiResponse`""
 
 
-[This comment was created with https://github.com/brackendev/Pharo-OpenAI]
+[This comment was automatically created with https://github.com/brackendev/OpenAI-Pharo]
 "
 Class {
 	#name : #OpenAISDKModels,

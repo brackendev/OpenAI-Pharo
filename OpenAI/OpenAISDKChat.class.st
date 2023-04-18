@@ -1,23 +1,22 @@
 "
 Class: OpenAISDKChat
 
-I represent a class responsible for creating a chat instance with a specified role and content.
+I represent a chat message in the OpenAI SDK.
 
 Responsibilities:
-- Create a new chat instance.
-- Set the role of the chat instance.
-- Set the content of the chat instance.
+- I store the role of the sender (e.g., user or assistant).
+- I store the content of the chat message.
+- I can create a new instance of myself with a given role and content.
 
 Collaborators:
-- OpenAISDKChat instance: An instance of the OpenAISDKChat class used to create chat instances.
-- aRoleString: A string representing the role of the chat instance.
-- aContentString: A string representing the content of the chat instance.
+- OpenAISDKChat instances: I interact with other instances of myself to represent a conversation.
 
 Example:
-OpenAISDKChat createWithRole: 'Customer' content: 'I need help with my order.' ""Creates a new chat instance for a customer with a question about their order.""
+- chatMessage := OpenAISDKChat createWithRole: 'user' content: 'Hello, how are you?'
+  ""Create a new chat message with the role 'user' and content 'Hello, how are you?'""
 
 
-[This comment was created with https://github.com/brackendev/Pharo-OpenAI]
+[This comment was automatically created with https://github.com/brackendev/OpenAI-Pharo]
 "
 Class {
 	#name : #OpenAISDKChat,
@@ -47,6 +46,14 @@ OpenAISDKChat >> content [
 OpenAISDKChat >> content: anObject [
 
 	content := anObject
+]
+
+{ #category : #'public access' }
+OpenAISDKChat >> evaluate [
+
+	[ ^ Smalltalk compiler evaluate: content ]
+		on: Exception
+		do: [ :error | error inspect ]
 ]
 
 { #category : #accessing }
