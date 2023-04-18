@@ -13,7 +13,6 @@ OpenAI-Pharo
   * Generate images with different sizes
     * Programatically and GUI
   * Use images within the live Pharo environment
-    * Inspect and evaluate responses to objects
   * Export images as PNGs
 * **_Bonus!_** 
   * Automatically update Pharo class comments with a generated [Class Responsibility Collaborator](https://en.wikipedia.org/wiki/Class-responsibility-collaboration_card) (based on class definitions and source code)
