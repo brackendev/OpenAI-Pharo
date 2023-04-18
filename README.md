@@ -5,13 +5,15 @@ OpenAI-Pharo
 
 * Chat
   * Interact with unlimited chatbots using different models
-  * Programatically and GUI
-  * Evaluate responses to Pharo objects
+    * Programatically and GUI
+  * Use responses within the live Pharo environment
+    * Inspect and evaluate responses to objects
   * Export chats as JSON
 * Image Generation
   * Generate images with different sizes
-  * Programatically and GUI
-  * Use images as Pharo objects
+    * Programatically and GUI
+  * Use images within the live Pharo environment
+    * Inspect and evaluate responses to objects
   * Export images as PNGs
 * **_Bonus!_** 
   * Automatically update Pharo class comments with a generated [Class Responsibility Collaborator](https://en.wikipedia.org/wiki/Class-responsibility-collaboration_card) (based on class definitions and source code)
@@ -49,13 +51,14 @@ Metacello new
 "Programatically use a chat session."
 
 sdk := (OpenAISDK createWithAPIKey: 'API_KEY').
-sdk model: 'gpt-4'. "Optional. Default is gpt-3.5-turbo"
-chat := OpenAIChat startWithSDK: sdk.
-chat submitSystemPrompt: 'You are a chatbot named OMM 0000.'.
-chat submitUserPrompt: 'Who are you?'.
-chat lastChat. "I am OMM 0000, a language model AI chatbot..."
-chat submitUserPrompt: 'Who created you?'.
-chat lastChat. "I was created by OpenAI..."
+chatSession := OpenAIChatSession startWithSDK: sdk.
+chatSession model: 'gpt-4'. "Optional. Default is gpt-3.5-turbo"
+chatSession submitSystemPrompt: 'You are a chatbot named OMM 0000.'.
+chatSession submitUserPrompt: 'Who are you?'.
+chatSession lastChat inspect. "Inspects the response: I am OMM 0000..."
+chatSession submitUserPrompt: 'Show me Pharo code to add numbers to your name. Respond with only Pharo code, no other text, no code block.'.
+chatSession lastChat inspect. "Inspects the Pharo code response"
+chatSession lastChat evaluate inspect. "Inspects the Pharo code evaluated"
 ```
 
 ```smalltalk
@@ -67,21 +70,13 @@ sdk createImageWithPrompt: 'An elephant drinking water on the moon' number: 2 si
 
 ```smalltalk
 "Open a chat session GUI."
-"/export - Export the chat to a JSON file"
-"/evaluate - Evaluate the last response as an object"
-"/inspect - Inspect the last response"
-"/system A new system prompt"
 
 sdk := (OpenAISDK createWithAPIKey: 'API_KEY').
-sdk model: 'gpt-4'. "Optional. Default is gpt-3.5-turbo"
 OpenAIChatGUI openWithSDK: sdk.
 ```
 
 ```smalltalk
 "Open an image generation GUI."
-"/export - Export the image to a PNG file"
-"/imagesize '256x256' or '512x512' or '1024x1024'"
-"/inspect - Inspect the image"
 
 sdk := (OpenAISDK createWithAPIKey: 'API_KEY').
 OpenAIImageGUI openWithSDK: sdk.
@@ -91,36 +86,24 @@ OpenAIImageGUI openWithSDK: sdk.
 "Update any class comment with the generated Class Responsibility Collaborator (based on class definitions and source code)."
 
 sdk := (OpenAISDK createWithAPIKey: 'API_KEY').
-sdk model: 'gpt-4'. "Optional. Default is gpt-3.5-turbo"
 AnyClassYouWant updateCommentWithOpenAICRCWithSDK: sdk.
-```
-
-```smalltalk
-"Evaluate chat responses to objects."
-
-sdk := (OpenAISDK createWithAPIKey: 'API_KEY').
-chat := OpenAIChat startWithSDK: sdk.
-chat submitUserPrompt: 'Return a list of the US states as a Pharo array'.
-content := chat lastChat content. "#('Alabama' 'Alaska' 'Arizona' 'Arkansas' ..."
-array := Smalltalk compiler evaluate: content.
-array size. "50"
-array first. "Alabama"
 ```
 
 ## Documentation
 
 ### Extension Methods
 
-* [**Class** _classResponsibilityCollaboratorWithSDK_](https://github.com/brackendev/OpenAI-Pharo/blob/f97f77903d201d018b14d8ab6e43c8980c866464/OpenAI/Class.extension.st#L4) - Generate a [Class Responsibility Collaborator](https://en.wikipedia.org/wiki/Class-responsibility-collaboration_card) for a class (based on class definitions and source code).
-* [**Class** _definitionAndSourceCode_](https://github.com/brackendev/OpenAI-Pharo/blob/f97f77903d201d018b14d8ab6e43c8980c866464/OpenAI/Class.extension.st#L36) - Retrieve the definition and source code for a class.
-* [**Class** _updateCommentWithOpenAICRCWithSDK_](https://github.com/brackendev/OpenAI-Pharo/blob/f97f77903d201d018b14d8ab6e43c8980c866464/OpenAI/Class.extension.st#L46) - Update a class comment with a generated [Class Responsibility Collaborator](https://en.wikipedia.org/wiki/Class-responsibility-collaboration_card).
-* [**ImageMorph** _outputPNGFile_](https://github.com/brackendev/OpenAI-Pharo/blob/f97f77903d201d018b14d8ab6e43c8980c866464/OpenAI/ImageMorph.extension.st#L4) - Export an ImageMorph to a PNG file. [OpenAIImageGUI](https://github.com/brackendev/OpenAI-Pharo/blob/master/OpenAI/OpenAIImageGUI.class.st) uses this to export images.
-* [**String** _outputTextFile_](https://github.com/brackendev/OpenAI-Pharo/blob/f97f77903d201d018b14d8ab6e43c8980c866464/OpenAI/String.extension.st#L4) - Export a string to a text file. [OpenAIChatGUI](https://github.com/brackendev/OpenAI-Pharo/blob/master/OpenAI/OpenAIChatGUI.class.st) uses this to export chats.
+* [**Class** _classResponsibilityCollaboratorWithSDK_](https://github.com/brackendev/OpenAI-Pharo/blob/master/OpenAI/Class.extension.st) - Generate a [Class Responsibility Collaborator](https://en.wikipedia.org/wiki/Class-responsibility-collaboration_card) for a class (based on class definitions and source code).
+* [**Class** _definitionAndSourceCode_](https://github.com/brackendev/OpenAI-Pharo/blob/master/OpenAI/Class.extension.st) - Retrieve the definition and source code for a class.
+* [**Class** _updateCommentWithOpenAICRCWithSDK_](https://github.com/brackendev/OpenAI-Pharo/blob/master/OpenAI/Class.extension.st) - Update a class comment with a generated [Class Responsibility Collaborator](https://en.wikipedia.org/wiki/Class-responsibility-collaboration_card).
+* [**ImageMorph** _outputPNGFile_](https://github.com/brackendev/OpenAI-Pharo/blob/master/OpenAI/ImageMorph.extension.st) - Export an ImageMorph to a PNG file. [OpenAIImageGUI](https://github.com/brackendev/OpenAI-Pharo/blob/master/OpenAI/OpenAIImageGUI.class.st) uses this to export images.
+* [**String** _outputTextFile_](https://github.com/brackendev/OpenAI-Pharo/blob/master/OpenAI/String.extension.st) - Export a string to a text file. [OpenAIChatGUI](https://github.com/brackendev/OpenAI-Pharo/blob/master/OpenAI/OpenAIChatGUI.class.st) uses this to export chats.
+* [**String** _outputTextFile_](https://github.com/brackendev/OpenAI-Pharo/blob/master/OpenAI/String.extension.st) - Export a string to a text file. [OpenAIChatGUI](https://github.com/brackendev/OpenAI-Pharo/blob/master/OpenAI/OpenAIChatGUI.class.st) uses this to export chats.
 
 ## TODO
 
 - [ ] More testing for errors, token limits, etc.
-- [ ] Add documentation for core, GUI, and model classes
+- [ ] Add more documentation and examples
 - [ ] Test on [Pharo](https://www.pharo.org/) development versions: 11, 12
 
 ## Acknowledgements
