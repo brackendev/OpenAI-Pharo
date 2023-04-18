@@ -1,17 +1,21 @@
 "
 Class: OpenAISDKImage
 
-I represent a class that creates an instance of a OpenAISDK image. I know how to take an API response and extract the created and data values from it.
+I represent an image object in the OpenAI SDK.
 
-Main Collaborators:
-- OpenAISDKImage instance: I create instances of this class based on API responses.
+Responsibilities:
+- I store the creation timestamp of the image.
+- I store the image data.
+- I can be created from an API response.
+
+Collaborators:
+- APIResponse: I interact with APIResponse to extract the necessary information to create an instance of myself.
 
 Example:
-OpenAISDKImage createWithAPIResponse: aResponse.
-""Creates a new instance of OpenAISDKImage based on an API response and returns it.""
+- ""Create an OpenAISDKImage instance from an API response: `image := OpenAISDKImage createWithAPIResponse: aResponse`""
 
 
-[This comment was created with https://github.com/brackendev/Pharo-OpenAI]
+[This comment was automatically created with https://github.com/brackendev/OpenAI-Pharo]
 "
 Class {
 	#name : #OpenAISDKImage,

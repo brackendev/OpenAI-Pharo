@@ -1,29 +1,29 @@
 "
 Class: OpenAISDK
 
-I represent a class that creates a connection to the OpenAI API.
+I represent a class that interacts with the OpenAI API.
 
 Responsibilities:
-- Create a connection to the OpenAI API using an API key and optionally an organization string.
-- Set headers for the API request.
-- Return a new instance of the class with the created client.
+- I create an instance of the OpenAISDK class with the provided API key and organization.
+- I set the necessary headers for authentication and content type.
+- I provide a method to open the usage page of the OpenAI platform.
 
 Collaborators:
-- ZnClient: used to create the HTTP client for the API request.
+- ZnClient: I use ZnClient to create a new client instance and set headers for authentication and content type.
+- WebBrowser: I use WebBrowser to open the usage page of the OpenAI platform.
 
-Example:
-""Create a new OpenAISDK instance with the provided API key.""
-OpenAISDK createWithAPIKey: 'myAPIkey' organization: nil.
+Examples:
+- ""Create an instance of OpenAISDK with an API key: OpenAISDK createWithAPIKey: 'your_api_key_here'""
+- ""Open the usage page of the OpenAI platform: OpenAISDK openUsagePage""
 
 
-[This comment was automatically generated with https://github.com/brackendev/Pharo-OpenAI]
+[This comment was automatically created with https://github.com/brackendev/OpenAI-Pharo]
 "
 Class {
 	#name : #OpenAISDK,
 	#superclass : #Object,
 	#instVars : [
-		'client',
-		'model'
+		'client'
 	],
 	#category : #'OpenAI-Core'
 }
@@ -38,6 +38,7 @@ OpenAISDK class >> createWithAPIKey: anAPIKeyString [
 OpenAISDK class >> createWithAPIKey: anAPIKeyString organization: anOrganizationString [
 
 	"Get an API key at https://platform.openai.com/account/api-keys"
+
 	"https://platform.openai.com/docs/api-reference/authentication"
 
 	| client |
@@ -46,7 +47,14 @@ OpenAISDK class >> createWithAPIKey: anAPIKeyString organization: anOrganization
 	client headerAt: 'Authorization' put: 'Bearer ' , anAPIKeyString.
 	anOrganizationString isNotNil ifTrue: [ 
 		client headerAt: 'OpenAI-Organization' put: anOrganizationString ].
+	client timeout: 60.
 	^ self new client: client
+]
+
+{ #category : #public }
+OpenAISDK class >> openUsagePage [
+
+	WebBrowser openOn: 'https://platform.openai.com/account/usage'
 ]
 
 { #category : #private }
@@ -67,33 +75,30 @@ OpenAISDK >> client: anObject [
 ]
 
 { #category : #public }
-OpenAISDK >> createChatCompletionWithMessages: aChatObjectArray [
+OpenAISDK >> createChatCompletionWithMessages: aChatObjectsArray model: aModelString temperature: aTemperatureFloat [
 
-	^ self
-		  createChatCompletionWithMessages: aChatObjectArray
-		  model: self model
-]
-
-{ #category : #public }
-OpenAISDK >> createChatCompletionWithMessages: aChatObjectsArray model: aModelString [
-
-	"https://platform.openai.com/docs/api-reference/chat/create"
-
-	| dict theClient json response decoded |
+	[| dict theClient json response decoded |
 	dict := { 
+		        ('messages'
+		         -> (aChatObjectsArray collect: [ :e | e toDictionary ])).
 		        ('model' -> aModelString).
-		        ('messages' -> (aChatObjectsArray collect: [ :e | e toDictionary ])) } asDictionary.
+		        ('temperature' -> aTemperatureFloat) } asDictionary.
 	json := NeoJSONWriter toString: dict.
+
 	theClient := self client.
-	theClient entity:
-		(ZnEntity with: json type: ZnMimeType applicationJson).
-	theClient url: self baseURL , '/chat/completions'.
+	theClient
+		entity: (ZnEntity with: json type: ZnMimeType applicationJson);
+		url: self baseURL , '/chat/completions'.
+
 	response := theClient post.
+
 	decoded := NeoJSONReader fromString: response.
-	(decoded includesKey: 'error')
-		ifTrue: [ ^ OpenAISDKError createWithAPIResponse: decoded ]
-		ifFalse: [ 
-		^ OpenAISDKChatCompletion createWithAPIResponse: decoded ]
+	(decoded includesKey: 'error') ifTrue: [ 
+		OpenAISDKException signalForObject: decoded ].
+
+	^ OpenAISDKChatCompletion createWithAPIResponse: decoded]
+		on: Exception
+		do: [ :error | error inspect ]
 ]
 
 { #category : #public }
@@ -107,22 +112,27 @@ OpenAISDK >> createImageWithPrompt: aPromptString number: aNumberString size: aS
 
 	"https://platform.openai.com/docs/api-reference/images/create"
 
-	| dict theClient json response decoded |
+	[| dict theClient json response decoded |
 	dict := { 
 		        ('prompt' -> aPromptString).
 		        ('n' -> aNumberString).
 		        ('size' -> aSizeString) } asDictionary.
 	json := NeoJSONWriter toString: dict.
+
 	theClient := self client.
-	theClient entity:
-		(ZnEntity with: json type: ZnMimeType applicationJson).
-	theClient url: self baseURL , '/images/generations'.
+	theClient
+		entity: (ZnEntity with: json type: ZnMimeType applicationJson);
+		url: self baseURL , '/images/generations'.
+
 	response := theClient post.
+
 	decoded := NeoJSONReader fromString: response.
-	(decoded includesKey: 'error')
-		ifTrue: [ ^ OpenAISDKError createWithAPIResponse: decoded ]
-		ifFalse: [ 
-		^ OpenAISDKImage createWithAPIResponse: decoded ]
+	(decoded includesKey: 'error') ifTrue: [ 
+		OpenAISDKException signalForObject: decoded ].
+
+	^ OpenAISDKImage createWithAPIResponse: decoded]
+		on: Exception
+		do: [ :error | error inspect ]
 ]
 
 { #category : #public }
@@ -130,27 +140,19 @@ OpenAISDK >> listModels [
 
 	"https://platform.openai.com/docs/api-reference/models/list"
 
-	| theClient response decoded |
+	[| theClient response decoded |
 	theClient := self client.
 	theClient url: self baseURL , '/models'.
+
 	response := theClient get.
+
 	decoded := NeoJSONReader fromString: response.
-	(decoded includesKey: 'error')
-		ifTrue: [ ^ OpenAISDKError createWithAPIResponse: decoded ]
-		ifFalse: [ 
-		^ OpenAISDKModels createWithAPIResponse: decoded ]
-]
+	(decoded includesKey: 'error') ifTrue: [ 
+		OpenAISDKException signalForObject: decoded ].
 
-{ #category : #accessing }
-OpenAISDK >> model [
-
-	model ifNil: [ ^ 'gpt-3.5-turbo' ] ifNotNil: [ ^ model ]
-]
-
-{ #category : #accessing }
-OpenAISDK >> model: anObject [
-
-	model := anObject
+	^ OpenAISDKModels createWithAPIResponse: decoded]
+		on: Exception
+		do: [ :error | error inspect ]
 ]
 
 { #category : #public }
@@ -158,13 +160,19 @@ OpenAISDK >> retrieveModel: aModelString [
 
 	"https://platform.openai.com/docs/api-reference/models/retrieve"
 
+	[ 
 	| theClient response decoded |
 	theClient := self client.
 	theClient url: self baseURL , '/models/' , aModelString.
+
 	response := theClient get.
+
 	decoded := NeoJSONReader fromString: response.
-	(decoded includesKey: 'error')
-		ifTrue: [ ^ OpenAISDKError createWithAPIResponse: decoded ]
-		ifFalse: [ 
-		^ OpenAISDKModel createWithAPIResponse: decoded ]
+	(decoded includesKey: 'error') ifTrue: [ 
+		OpenAISDKException signalForObject: decoded ].
+
+	^ OpenAISDKModel createWithAPIResponse: decoded
+	]
+		on: Exception
+		do: [ :error | error inspect ]
 ]

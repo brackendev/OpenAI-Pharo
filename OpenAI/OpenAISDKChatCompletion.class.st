@@ -1,24 +1,21 @@
 "
 Class: OpenAISDKChatCompletion
 
-I represent a class that creates a chat completion object from an API response, and extracts the necessary information from the response.
+I represent a chat completion object in the OpenAI SDK.
 
 Responsibilities:
-- Create a chat completion object with the necessary information from an API response.
-- Extract relevant information such as ID, object, created date, model, choices, and usage from the API response.
-- Generate chat completion choices by creating OpenAISDKChatCompletionChoices objects from the API response.
+- I store the ID of the chat completion.
+- I store the object type, creation time, and model information of the chat completion.
+- I store the choices and usage information of the chat completion.
 
 Collaborators:
-- OpenAISDKChatCompletionChoices: create chat completion choices by calling its createWithAPIResponse method.
+- OpenAISDKChatCompletionChoices: I create instances of this class using the API response data.
 
 Example:
-""Creating a chat completion object from an API response""
-response := {'id': '123', 'object': 'chat', 'created': '2022-05-23', 'model': 'gpt-3', 'choices': [{'text': 'Hello', 'confidence': 0.9}, {'text': 'Hi there!', 'confidence': 0.8}], 'usage': 'Development'}.
-completion := OpenAISDKChatCompletion createWithAPIResponse: response.
-""completion now contains the extracted information from the API response""
+- ""Create a new OpenAISDKChatCompletion instance with the API response data.""
 
 
-[This comment was created with https://github.com/brackendev/Pharo-OpenAI]
+[This comment was automatically created with https://github.com/brackendev/OpenAI-Pharo]
 "
 Class {
 	#name : #OpenAISDKChatCompletion,

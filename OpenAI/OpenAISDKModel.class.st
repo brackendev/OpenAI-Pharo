@@ -1,22 +1,21 @@
 "
 Class: OpenAISDKModel
 
-I represent a class responsible for creating new instances of the OpenAISDKModel class. I know how to initialize instances with API responses.
+I represent a class that manages OpenAI SDK models.
 
 Responsibilities:
-- Create instances of OpenAISDKModel
-- Extract data from API responses
-- Initialize instances with attributes from API responses
+- I create instances of OpenAISDKModel with API response data.
+- I store information about the model's owner, parent, root, permission, creation time, object, and ID.
+- I provide access to the stored information for other classes.
 
 Collaborators:
-- API responses
-- OpenAISDKModel instances
-- Data access methods
+- APIResponse: I receive data from API responses to create instances of OpenAISDKModel.
 
-Example: Creating a new instance of OpenAISDKModel with an API response. ""OpenAISDKModel createWithAPIResponse: aApiResponse returns a new instance of OpenAISDKModel with attributes initialized from aApiResponse.""
+Example:
+- ""Create an OpenAISDKModel instance with API response data: `model := OpenAISDKModel createWithAPIResponse: aResponse`""
 
 
-[This comment was created with https://github.com/brackendev/Pharo-OpenAI]
+[This comment was automatically created with https://github.com/brackendev/OpenAI-Pharo]
 "
 Class {
 	#name : #OpenAISDKModel,

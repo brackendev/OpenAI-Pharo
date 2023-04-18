@@ -1,22 +1,23 @@
 "
 Class: OpenAISDKExample
 
-I represent a class that contains examples for using the OpenAI SDK.
+I represent a class that demonstrates the usage of OpenAISDK.
 
 Responsibilities:
-- Provide an example of creating an OpenAISDK instance with an API key.
-- Provide an example of creating an OpenAISDK instance with an API key and organization.
-- Knows how to use the OpenAISDK to create instances.
+- I demonstrate how to create an OpenAISDK instance with an API key and organization.
+- I demonstrate how to create an OpenAISDK instance with just an API key.
+- I demonstrate how to open the usage page of OpenAISDK.
 
 Collaborators:
-- OpenAISDK class: Used to create instances of the OpenAISDK class.
+- OpenAISDK: I create instances of OpenAISDK and interact with its methods.
 
-Example:
-""Create an OpenAISDK instance with API key 'API_KEY'""
-OpenAISDKExample exampleCreateWithAPIKey.
+Examples:
+- ""Create an OpenAISDK instance with API key and organization"": exampleCreateWithAPIKey_organization
+- ""Create an OpenAISDK instance with just an API key"": exampleCreateWithAPIKey
+- ""Open the usage page of OpenAISDK"": exampleOpenUsagePage
 
 
-[This comment was created with https://github.com/brackendev/Pharo-OpenAI]
+[This comment was automatically created with https://github.com/brackendev/OpenAI-Pharo]
 "
 Class {
 	#name : #OpenAISDKExample,
@@ -37,4 +38,11 @@ OpenAISDKExample class >> exampleCreateWithAPIKey_organization [
 
 	<sampleInstance>
 	^ OpenAISDK createWithAPIKey: 'API_KEY' organization: 'ORGANIZATION'
+]
+
+{ #category : #examples }
+OpenAISDKExample class >> exampleOpenUsagePage [
+
+	<sampleInstance>
+	^ OpenAISDK openUsagePage 
 ]
