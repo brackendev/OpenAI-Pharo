@@ -96,7 +96,7 @@ AnyClassYouWant updateCommentWithOpenAICRCWithSDK: sdk.
 * [**Class** _definitionAndSourceCode_](https://github.com/brackendev/OpenAI-Pharo/blob/master/OpenAI/Class.extension.st) - Retrieve the definition and source code for a class.
 * [**Class** _updateCommentWithOpenAICRCWithSDK_](https://github.com/brackendev/OpenAI-Pharo/blob/master/OpenAI/Class.extension.st) - Update a class comment with a generated [Class Responsibility Collaborator](https://en.wikipedia.org/wiki/Class-responsibility-collaboration_card).
 * [**ImageMorph** _outputPNGFile_](https://github.com/brackendev/OpenAI-Pharo/blob/master/OpenAI/ImageMorph.extension.st) - Export an ImageMorph to a PNG file. [OpenAIImageGUI](https://github.com/brackendev/OpenAI-Pharo/blob/master/OpenAI/OpenAIImageGUI.class.st) uses this to export images.
-* [**String** _outputTextFile_](https://github.com/brackendev/OpenAI-Pharo/blob/master/OpenAI/String.extension.st) - Export a string to a text file. [OpenAIChatGUI](https://github.com/brackendev/OpenAI-Pharo/blob/master/OpenAI/OpenAIChatGUI.class.st) uses this to export chats.
+* [**String** _imageFromURL_](https://github.com/brackendev/OpenAI-Pharo/blob/master/OpenAI/String.extension.st) - Retrieve an image from a URL. [OpenAIImageGUI](https://github.com/brackendev/OpenAI-Pharo/blob/master/OpenAI/OpenAIImageGUI.class.st) uses this to retrieve images.
 * [**String** _outputTextFile_](https://github.com/brackendev/OpenAI-Pharo/blob/master/OpenAI/String.extension.st) - Export a string to a text file. [OpenAIChatGUI](https://github.com/brackendev/OpenAI-Pharo/blob/master/OpenAI/OpenAIChatGUI.class.st) uses this to export chats.
 
 ## TODO
