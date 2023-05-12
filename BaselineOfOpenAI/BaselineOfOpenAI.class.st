@@ -40,10 +40,6 @@ BaselineOfOpenAI >> baseline: spec [
 		spec baseline: 'NeoJSON' with: [ 
 			spec
 				repository: 'github://svenvc/NeoJSON'
-			].
-		spec baseline: 'ZincHTTPComponents' with: [ 
-			spec
-				repository: 'github://svenvc/zinc'
 			]
 		]
 ]
