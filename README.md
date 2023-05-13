@@ -103,7 +103,7 @@ AnyClassYouWant updateCommentWithOpenAICRCWithSDK: sdk.
 
 - [ ] More testing for errors, token limits, etc.
 - [ ] Add more documentation and examples
-- [ ] Test on [Pharo](https://www.pharo.org/) development versions: 11, 12
+- [ ] Test on [Pharo](https://www.pharo.org/) versions 11 and 12
 
 ## Acknowledgements
 
