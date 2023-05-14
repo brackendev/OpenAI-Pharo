@@ -22,12 +22,12 @@ OpenAI-Pharo
 ## Requirements
 
 * [OpenAI](https://platform.openai.com/) API key
-* [Pharo 10](https://www.pharo.org/) installation
+* [Pharo 11](https://www.pharo.org/) installation
 
 ## Installation
 
 1. Go to <https://platform.openai.com/account/api-keys> to set up an API key.
-2. In a [Pharo 10](https://www.pharo.org/) Playground, _Do it_:
+2. In a [Pharo 11](https://www.pharo.org/) Playground, _Do it_:
 
 ```smalltalk
 Metacello new 
@@ -103,14 +103,14 @@ AnyClassYouWant updateCommentWithOpenAICRCWithSDK: sdk.
 
 - [ ] More testing for errors, token limits, etc.
 - [ ] Add more documentation and examples
-- [ ] Test on [Pharo](https://www.pharo.org/) versions 11 and 12
+- [ ] Test on [Pharo](https://www.pharo.org/) development version 12
 
 ## Acknowledgements
 
 This project makes use of the following third-party libraries and utilities:
 
 * [NeoJSON](https://github.com/svenvc/NeoJSON)
-* [Zinc HTTP Components](https://github.com/svenvc/zinc)
+* [Zinc HTTP Components](https://github.com/svenvc/zinc) (Now included with Pharo)
 
 ## Author
 
