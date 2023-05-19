@@ -110,7 +110,7 @@ AnyClassYouWant updateCommentWithOpenAICRCWithSDK: sdk.
 This project makes use of the following third-party libraries and utilities:
 
 * [NeoJSON](https://github.com/svenvc/NeoJSON)
-* [Zinc HTTP Components](https://github.com/svenvc/zinc) (Now included with Pharo)
+* [Zinc HTTP Components](https://github.com/svenvc/zinc) (Now included with Pharo 11)
 
 ## Author
 
