@@ -77,9 +77,10 @@ OpenAIChatGUI >> actionHelp [
 
 	self displayResponse:
 		'Additional commands:' , String crlf , String crlf
-		, '/inspectsession - Inspect the session' , String crlf
-		, '/listmodels - List all available models' , String crlf
-		, '/system [prompt] - Set system prompt'
+		, '/inspect - Inspect the session' , String crlf
+		, '/models - List all available models' , String crlf
+		, '/system [prompt] - Set system prompt' , String crlf
+		, '/usage - View API usage'
 ]
 
 { #category : #'action handling' }
@@ -306,21 +307,27 @@ OpenAIChatGUI >> fieldOutput: anObject [
 { #category : #private }
 OpenAIChatGUI >> handleInput: aString [
 
-	UIManager default showWaitCursorWhile: [ 
+[
+	UIManager default showWaitCursorWhile: [
 		| text |
 		text := aString trimBoth.
 		text ifEmpty: [ ^ nil ].
-				text = '/inspectsession' ifTrue: [ 
+		text = '/inspect' ifTrue: [
 			self chatSession inspect.
 			fieldInput text: ''.
 			^ nil
 			].
-		text = '/listmodels' ifTrue: [ 
+		text = '/models' ifTrue: [
 			self chatSession sdk listModels inspect.
 			fieldInput text: ''.
 			^ nil
 			].
 		(text beginsWith: '/system ') ifTrue: [ ^ self commandSystem: text ].
+		(text beginsWith: '/usage') ifTrue: [
+			WebBrowser openOn: 'https://platform.openai.com/account/usage'.
+			fieldInput text: ''.
+			^ nil
+			].
 
 		self chatSession model: fieldModel text.
 		self chatSession temperature: temperatureInput number.
@@ -333,6 +340,9 @@ OpenAIChatGUI >> handleInput: aString [
 
 		^ nil
 		]
+		]
+		on: Exception
+		do: [ :error | error inspect ]
 ]
 
 { #category : #initialization }
