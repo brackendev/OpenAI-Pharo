@@ -41,13 +41,13 @@ Metacello new
 (An [examples package](https://github.com/brackendev/OpenAI-Pharo/tree/master/OpenAI-Examples) is also included.)
 
 ```smalltalk
-"Lists the currently available models."
+"Lists the currently available models"
 
 (OpenAISDK createWithAPIKey: 'API_KEY') listModels.
 ```
 
 ```smalltalk
-"Programatically use a chat session."
+"Programatically use a chat session"
 
 sdk := (OpenAISDK createWithAPIKey: 'API_KEY').
 chatSession := OpenAIChatSession startWithSDK: sdk.
@@ -68,21 +68,21 @@ sdk createImageWithPrompt: 'An elephant drinking water on the moon' number: 2 si
 ```
 
 ```smalltalk
-"Open a chat session GUI."
+"Open a chat session GUI"
 
 sdk := (OpenAISDK createWithAPIKey: 'API_KEY').
 OpenAIChatGUI openWithSDK: sdk.
 ```
 
 ```smalltalk
-"Open an image generation GUI."
+"Open an image generation GUI"
 
 sdk := (OpenAISDK createWithAPIKey: 'API_KEY').
 OpenAIImageGUI openWithSDK: sdk.
 ```
 
 ```smalltalk
-"Update any class comment with the generated Class Responsibility Collaborator (based on class definitions and source code)."
+"Update any class comment with the generated Class Responsibility Collaborator (based on class definitions and source code)"
 
 sdk := (OpenAISDK createWithAPIKey: 'API_KEY').
 AnyClassYouWant updateCommentWithOpenAICRCWithSDK: sdk.
