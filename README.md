@@ -49,7 +49,7 @@ Metacello new
 ```smalltalk
 "Programatically use a chat session"
 
-sdk := (OpenAISDK createWithAPIKey: 'API_KEY').
+sdk := OpenAISDK createWithAPIKey: 'API_KEY'.
 chatSession := OpenAIChatSession startWithSDK: sdk.
 chatSession model: 'gpt-4'. "Optional. Default is gpt-3.5-turbo"
 chatSession submitSystemPrompt: 'You are a chatbot named OMM 0000.'.
@@ -63,28 +63,28 @@ chatSession lastChat evaluate inspect. "Inspects the Pharo code evaluated"
 ```smalltalk
 "Programtically generate images"
 
-sdk := (OpenAISDK createWithAPIKey: 'API_KEY').
+sdk := OpenAISDK createWithAPIKey: 'API_KEY'.
 sdk createImageWithPrompt: 'An elephant drinking water on the moon' number: 2 size: '1024x1024'.
 ```
 
 ```smalltalk
 "Open a chat session GUI"
 
-sdk := (OpenAISDK createWithAPIKey: 'API_KEY').
+sdk := OpenAISDK createWithAPIKey: 'API_KEY'.
 OpenAIChatGUI openWithSDK: sdk.
 ```
 
 ```smalltalk
 "Open an image generation GUI"
 
-sdk := (OpenAISDK createWithAPIKey: 'API_KEY').
+sdk := OpenAISDK createWithAPIKey: 'API_KEY'.
 OpenAIImageGUI openWithSDK: sdk.
 ```
 
 ```smalltalk
 "Update any class comment with the generated Class Responsibility Collaborator (based on class definitions and source code)"
 
-sdk := (OpenAISDK createWithAPIKey: 'API_KEY').
+sdk := OpenAISDK createWithAPIKey: 'API_KEY'.
 AnyClassYouWant updateCommentWithOpenAICRCWithSDK: sdk.
 ```
 
