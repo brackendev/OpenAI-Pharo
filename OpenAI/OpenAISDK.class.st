@@ -77,8 +77,8 @@ OpenAISDK >> client: anObject [
 { #category : #public }
 OpenAISDK >> createChatCompletionWithMessages: aChatObjectsArray model: aModelString temperature: aTemperatureFloat [
 
-	[| dict theClient json response decoded |
-	dict := { 
+	| dict theClient json response decoded |
+	dict := {
 		        ('messages'
 		         -> (aChatObjectsArray collect: [ :e | e toDictionary ])).
 		        ('model' -> aModelString).
@@ -93,12 +93,10 @@ OpenAISDK >> createChatCompletionWithMessages: aChatObjectsArray model: aModelSt
 	response := theClient post.
 
 	decoded := NeoJSONReader fromString: response.
-	(decoded includesKey: 'error') ifTrue: [ 
+	(decoded includesKey: 'error') ifTrue: [
 		OpenAISDKException signalForObject: decoded ].
 
-	^ OpenAISDKChatCompletion createWithAPIResponse: decoded]
-		on: Exception
-		do: [ :error | error inspect ]
+	^ OpenAISDKChatCompletion createWithAPIResponse: decoded
 ]
 
 { #category : #public }
@@ -109,11 +107,10 @@ OpenAISDK >> createImageWithPrompt: aPromptString [
 
 { #category : #public }
 OpenAISDK >> createImageWithPrompt: aPromptString number: aNumberString size: aSizeString [
-
 	"https://platform.openai.com/docs/api-reference/images/create"
 
-	[| dict theClient json response decoded |
-	dict := { 
+	| dict theClient json response decoded |
+	dict := {
 		        ('prompt' -> aPromptString).
 		        ('n' -> aNumberString).
 		        ('size' -> aSizeString) } asDictionary.
@@ -127,40 +124,33 @@ OpenAISDK >> createImageWithPrompt: aPromptString number: aNumberString size: aS
 	response := theClient post.
 
 	decoded := NeoJSONReader fromString: response.
-	(decoded includesKey: 'error') ifTrue: [ 
+	(decoded includesKey: 'error') ifTrue: [
 		OpenAISDKException signalForObject: decoded ].
 
-	^ OpenAISDKImage createWithAPIResponse: decoded]
-		on: Exception
-		do: [ :error | error inspect ]
+	^ OpenAISDKImage createWithAPIResponse: decoded
 ]
 
 { #category : #public }
 OpenAISDK >> listModels [
-
 	"https://platform.openai.com/docs/api-reference/models/list"
 
-	[| theClient response decoded |
+	| theClient response decoded |
 	theClient := self client.
 	theClient url: self baseURL , '/models'.
 
 	response := theClient get.
 
 	decoded := NeoJSONReader fromString: response.
-	(decoded includesKey: 'error') ifTrue: [ 
+	(decoded includesKey: 'error') ifTrue: [
 		OpenAISDKException signalForObject: decoded ].
 
-	^ OpenAISDKModels createWithAPIResponse: decoded]
-		on: Exception
-		do: [ :error | error inspect ]
+	^ OpenAISDKModels createWithAPIResponse: decoded
 ]
 
 { #category : #public }
 OpenAISDK >> retrieveModel: aModelString [
-
 	"https://platform.openai.com/docs/api-reference/models/retrieve"
 
-	[ 
 	| theClient response decoded |
 	theClient := self client.
 	theClient url: self baseURL , '/models/' , aModelString.
@@ -168,11 +158,8 @@ OpenAISDK >> retrieveModel: aModelString [
 	response := theClient get.
 
 	decoded := NeoJSONReader fromString: response.
-	(decoded includesKey: 'error') ifTrue: [ 
+	(decoded includesKey: 'error') ifTrue: [
 		OpenAISDKException signalForObject: decoded ].
 
 	^ OpenAISDKModel createWithAPIResponse: decoded
-	]
-		on: Exception
-		do: [ :error | error inspect ]
 ]

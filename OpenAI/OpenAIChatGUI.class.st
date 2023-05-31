@@ -307,7 +307,6 @@ OpenAIChatGUI >> fieldOutput: anObject [
 { #category : #private }
 OpenAIChatGUI >> handleInput: aString [
 
-[
 	UIManager default showWaitCursorWhile: [
 		| text |
 		text := aString trimBoth.
@@ -337,12 +336,7 @@ OpenAIChatGUI >> handleInput: aString [
 		self displayAssistantResponse: self chatSession lastChat content.
 
 		fieldInput text: ''.
-
-		^ nil
 		]
-		]
-		on: Exception
-		do: [ :error | error inspect ]
 ]
 
 { #category : #initialization }

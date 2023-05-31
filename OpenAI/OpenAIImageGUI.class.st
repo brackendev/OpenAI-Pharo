@@ -136,7 +136,6 @@ OpenAIImageGUI >> defaultLayout [
 { #category : #private }
 OpenAIImageGUI >> handleInput: aString [
 
-[ 
 	UIManager default showWaitCursorWhile: [
 		| text response url |
 		text := aString trimBoth.
@@ -156,9 +155,6 @@ OpenAIImageGUI >> handleInput: aString [
 
 		textField text: ''
 		]
-		]
-		on: Exception
-		do: [ :error | error inspect ]
 ]
 
 { #category : #accessing }
